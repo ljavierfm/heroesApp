@@ -15,7 +15,7 @@ export class HeroesComponent implements OnInit {
   }
 
   nuevoHeroe(){
-    this._router.navigate(['/heroe', new Date().getTime()]);
+    this._router.navigate(['/heroe', 'nuevo']);
   }
 
 }

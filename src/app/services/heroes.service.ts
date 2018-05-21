@@ -23,13 +23,14 @@ export class HeroesService {
     });
   }
 
-  actualizarHeroe(heroe: Heroe) {
+  actualizarHeroe(heroe: Heroe,key$:string) {
     let body = JSON.stringify(heroe);
     let headers = new Headers({
       'Content-Type': 'aplication-json'
     });
 
-    return this._http.post(this.heroesUrl, body, { headers }).map(res => {
+    let url=`${this.heroeUrl}/${key$}.json`;
+    return this._http.put(url, body, { headers }).map(res => {
       return res.json();
     });
   }
