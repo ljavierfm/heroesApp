@@ -8,6 +8,7 @@ import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroeComponent } from './components/heroes/heroe.component';
 import { HeroesService } from './services/heroes.service';
 import { HttpModule } from '@angular/http';
+import { KeysPipe } from './pipes/keys.pipe';
 
 
 
@@ -16,7 +17,8 @@ import { HttpModule } from '@angular/http';
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroeComponent
+    HeroeComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

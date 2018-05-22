@@ -19,13 +19,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+          <tr *ngFor="let key of heroes | keys;let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{heroes[key].nombre}}</td>
+            <td>{{heroes[key].casa}}</td>
+            <td>
+              <button [routerLink]="['/heroe',key]" type="button" class="btn btn-info">Editar</button>
+              <button (click)="eliminarHeroe(key)" type="button" class="btn btn-danger">Eliminar</button>
+            </td>
           </tr>
       </table>
+      <div *ngIf="(heroes | keys).length===0 && !loading" class="alert alert-info" role="alert"><strong>No hay registros que mostrar</strong></div>
+      <div *ngIf="loading" class="alert alert-info" role="warning"><strong>Cargando... por favor espere</strong></div>
     </div>
   </div>
 </div>

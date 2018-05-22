@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Heroe } from '../../interfaces/heroe.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { format } from 'url';
 
 
 @Component({
@@ -24,6 +25,10 @@ export class HeroeComponent implements OnInit {
   constructor(private _heroesService: HeroesService, private router: Router, private ar: ActivatedRoute) {
     this.ar.params.subscribe(params => {
       this.id = params['id'];
+
+      if(this.id!=='nuevo'){
+        this._heroesService.getHeroe(this.id).subscribe(heroe=>this.heroe=heroe);
+      }
     });
   }
   // constructor() { }
@@ -37,7 +42,7 @@ export class HeroeComponent implements OnInit {
 
 
     if (this.id === 'nuevo') {
-      this._heroesService.nuevoHeroe(this.heroe).subscribe(
+      this._heroesService.createHeroe(this.heroe).subscribe(
         data => {
           this.router.navigate(['/heroe', data.name]);
         },
@@ -47,7 +52,7 @@ export class HeroeComponent implements OnInit {
       );
     }
     else{
-      this._heroesService.actualizarHeroe(this.heroe,this.id).subscribe(
+      this._heroesService.updateHeroe(this.heroe,this.id).subscribe(
         data => {
           console.log(data);
         },
@@ -58,6 +63,13 @@ export class HeroeComponent implements OnInit {
     }
 
 
+  }
+
+  agregarNuevo(forma:NgForm){
+    this.router.navigate(['/heroe','nuevo']);
+    forma.reset({
+      casa:'Marvel'
+    });
   }
 
 }
